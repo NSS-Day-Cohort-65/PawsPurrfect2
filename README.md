@@ -1,6 +1,6 @@
 # Pawsitively Purrfect
 
-1. View a collection of cat memes
+1. View a collection of cat memes x
 1. Categories
 1. Sort by category
 1. Edit a meme
