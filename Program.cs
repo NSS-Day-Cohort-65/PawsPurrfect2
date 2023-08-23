@@ -100,9 +100,11 @@ void MainMenu()
             PostMeme();
             break;
          case "5":
-            throw new NotImplementedException();
+            EditMeme();
+            break;
          case "6":
-            throw new NotImplementedException();
+            DeleteMeme();
+            break;
       }
    }
 
@@ -115,11 +117,14 @@ void ViewAllMemes()
 {
    // loop through entirety of memes list, writing each to the console
    // whole collection to be iterated through: use foreach
+   int i = 0;
 
    foreach (Meme meme in memes)
    {
-      Console.WriteLine($"{meme.Content}");
+      Console.WriteLine($"{i}. {meme.Content}");
+      i++;
    }
+
 }
 
 void SortByCategory()
@@ -164,10 +169,38 @@ void PostMeme()
 
 void EditMeme()
 {
+   //list all memes for the user to choose to edit
+   ViewAllMemes();
+   //find the meme to edit
+   Console.WriteLine("Please enter the number of the meme you wish to edit:");
+   int choice = int.Parse(Console.ReadLine().Trim());
+   Meme chosenMeme = memes[choice];
+   //get user input
+   Console.WriteLine("Please enter content for the meme:");
+   string memeContent = Console.ReadLine();
 
+   Console.WriteLine("Please rate the cringe (0-1)");
+   decimal memeCringe = decimal.Parse(Console.ReadLine());
+
+   Console.WriteLine("Please choose a catagory:");
+   foreach (Category category in categories)
+   {
+      Console.WriteLine($"{category.Id} : {category.Name}");
+   }
+   int memeCategory = int.Parse(Console.ReadLine());
+   //get the user input to change the individual properties
+   chosenMeme.Content = memeContent;
+   chosenMeme.Cringe = memeCringe;
+   chosenMeme.CategoryId = memeCategory;
 }
 
 void DeleteMeme()
 {
-
+   //List all memes for the user to choose one for deletion
+   ViewAllMemes();
+   //get user input
+   Console.WriteLine("Please enter the number of the meme you wish to delete:");
+   int choice = int.Parse(Console.ReadLine().Trim());
+   //find the meme to delete and then delete it
+   memes.RemoveAt(choice);
 }
